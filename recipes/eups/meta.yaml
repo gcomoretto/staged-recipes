@@ -1,0 +1,38 @@
+# Note: there are many handy hints in comments in this example -- remove them when you've finalized your recipe
+
+# Jinja variables help maintain the recipe as you'll update the version only here.
+# Using the name variable with the URL in line 14 is convenient
+# when copying and pasting from another recipe, but not really needed.
+{% set name = "eups" %}
+{% set version = "2.1.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/RobertLuptonTheGood/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 095e18b6079c49bdba48355edcb479b0b1b91a9013cafdf00ca112e596b0885b
+
+build:
+  number: 11
+
+requirements:
+  build:
+    # If your project compiles code (such as a C extension) then add the required compilers as separate entries here.
+    # Compilers are named 'c', 'cxx' and 'fortran'.
+    - make
+
+  host:
+    - python
+    - git
+    - make
+
+  run:
+    - python
+
+about:
+  home: https://github.com/RobertLuptonTheGood/eups
+  license: GPL-2.0-or-later
+  license_family: GPL
+  summary: 'A version manager tracking product dependencies'
